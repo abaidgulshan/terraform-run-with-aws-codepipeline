@@ -19,15 +19,15 @@ resource "aws_codepipeline" "terraform" {
     action {
       name     = "Source_Checkout"
       category = "Source"
-      owner    = "AWS"
+      owner    = var.codepipe_project_owner
       provider = "CodeCommit"
-      version  = "1"
+      version  = var.codepipe_project_version
       configuration = {
         RepositoryName = var.codecommit_repo_name
         BranchName     = "master"
       }
 
-      output_artifacts = ["source_artifact"]
+      output_artifacts = ["${var.codepipe_project_artifacts}"]
     }
 
   }
@@ -37,11 +37,11 @@ resource "aws_codepipeline" "terraform" {
 
     action {
       name            = "Terraform_Validate"
-      category        = "Build"
-      owner           = "AWS"
-      provider        = "CodeBuild"
-      version         = "1"
-      input_artifacts = ["source_artifact"]
+      category        = var.codepipe_project_category
+      owner           = var.codepipe_project_owner
+      provider        = var.codepipe_project_provider
+      version  = var.codepipe_project_version
+      input_artifacts = ["${var.codepipe_project_artifacts}"]
       configuration = {
         ProjectName = aws_codebuild_project.terraform-validate.name
       }
@@ -53,11 +53,11 @@ resource "aws_codepipeline" "terraform" {
 
     action {
       name            = "Terraform_Plan"
-      category        = "Build"
-      owner           = "AWS"
-      provider        = "CodeBuild"
-      version         = "1"
-      input_artifacts = ["source_artifact"]
+      category        = var.codepipe_project_category
+      owner           = var.codepipe_project_owner
+      provider        = var.codepipe_project_provider
+      version  = var.codepipe_project_version
+      input_artifacts = ["${var.codepipe_project_artifacts}"]
       configuration = {
         ProjectName = aws_codebuild_project.terraform-plan.name
       }
@@ -71,9 +71,9 @@ resource "aws_codepipeline" "terraform" {
     action {
       name     = "Manual_Approval"
       category = "Approval"
-      owner    = "AWS"
+      owner    = var.codepipe_project_owner
       provider = "Manual"
-      version  = "1"
+      version  = var.codepipe_project_version
 
       configuration = {
         NotificationArn    = var.approve_sns_arn
@@ -89,11 +89,11 @@ resource "aws_codepipeline" "terraform" {
 
     action {
       name            = "Terraform_Apply"
-      category        = "Build"
-      owner           = "AWS"
-      provider        = "CodeBuild"
-      version         = "1"
-      input_artifacts = ["source_artifact"]
+      category        = var.codepipe_project_category
+      owner           = var.codepipe_project_owner
+      provider        = var.codepipe_project_provider
+      version  = var.codepipe_project_version
+      input_artifacts = ["${var.codepipe_project_artifacts}"]
       configuration = {
         ProjectName = aws_codebuild_project.terraform-apply.name
       }

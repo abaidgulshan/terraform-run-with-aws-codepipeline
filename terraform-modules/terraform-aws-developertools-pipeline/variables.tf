@@ -67,3 +67,80 @@ variable "codepipeline_name" {
 variable "approve_sns_arn" {
   type = string
 }
+
+
+variable "builder_compute_type" {
+  description = "Relative path to the Apply and Destroy build spec file"
+  type        = string
+  default     = "BUILD_GENERAL1_SMALL"
+}
+
+variable "builder_image" {
+  description = "Docker Image to be used by codebuild"
+  type        = string
+  default     = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+}
+
+variable "builder_type" {
+  description = "Type of codebuild run environment"
+  type        = string
+  default     = "LINUX_CONTAINER"
+}
+
+variable "builder_image_pull_credentials_type" {
+  description = "Image pull credentials type used by codebuild project"
+  type        = string
+  default     = "CODEBUILD"
+}
+
+
+variable "build_project_source" {
+  description = "CodeBuild project source type"
+  type        = string
+  default     = "CODECOMMIT"
+}
+
+variable "build_project_artifacts" {
+  description = "CodeBuild project artifacts type"
+  type        = string
+  default     = "NO_ARTIFACTS"
+}
+
+variable "build_project_source_version" {
+  description = "CodeBuild project artifacts type"
+  type        = string
+  default     = "NO_ARTIFACTS"
+}
+
+
+variable "codepipe_project_owner" {
+  description = "CodePipeline project Owner"
+  type        = string
+  default     = "AWS"
+}
+
+
+variable "codepipe_project_version" {
+  description = "CodePipeline project Version"
+  type        = string
+  default     = "1"
+}
+
+variable "codepipe_project_artifacts" {
+  description = "CodePipeline project artifacts"
+  type        = string
+  default     = "source_artifact"
+}
+
+variable "codepipe_project_provider" {
+  description = "CodePipeline project provider "
+  type        = string
+  default     = "CodeBuild"
+}
+
+
+variable "codepipe_project_category" {
+  description = "CodePipeline project provider "
+  type        = string
+  default     = "Build"
+}
