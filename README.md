@@ -2,6 +2,15 @@
 
 This Terraform configuration sets up  AWS reourses with AWS developer tools pipeline
 
+Table of Contents
+=================
+
+   * [Prerequisites 🛠️](#prerequisites-️)
+   * [Usage 📋](#usage-)
+   * [Key Files 🛸](#key-files-)
+   * [Directory Structure 📂](#directory-structure-)
+
+
 ## Prerequisites 🛠️
 
 Before you begin, make sure you have the following:
